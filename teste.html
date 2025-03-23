@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desafio 2 - Trilhas</title>
+    <link rel="stylesheet" href="./dist/output.css" />
+  </head>
+  <body>
+    <main class="w-screen h-screen flex">
+      <section
+        class="flex relative flex-col gap-4 pt-16 pl-16 pr-16 w-full h-full lg:w-1/2"
+      >
+        <div class="flex p-2 flex-col gap-6">
+          <div class="flex gap-2">
+            <img src="/assets/arrow-left.svg" alt="Seta para a esquerda" />
+            <a href="#" class="text-secondary">Voltar</a>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h1 class="text-heading-2 font-semibold">
+              Formulário de inscrição
+            </h1>
+            <p class="text-heading-4 text-secondary font-normal">
+              Preencha os dados abaixo para fazer sua inscrição no Programa
+              Trilhas.
+            </p>
+          </div>
+        </div>
+
+        <button
+          id="prevBtn"
+          class="absolute top-1/2 left-0 transform -translate-y-1/2"
+        >
+          <svg
+            class="fill-brand-dark cursor-pointer"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15.8051 18.593C15.4776 19.0376 14.8516 19.1326 14.4069 18.8051C14.0615 18.5507 13.7332 18.2963 13.4472 18.0731C12.8764 17.6276 12.1118 17.0143 11.3444 16.3479C10.5819 15.6859 9.7936 14.9518 9.1881 14.2666C8.8864 13.9251 8.6089 13.5721 8.4014 13.2279C8.2105 12.9112 8 12.476 8 11.9999C8 11.5238 8.2105 11.0885 8.4014 10.7718C8.6089 10.4276 8.8864 10.0747 9.1881 9.7332C9.7936 9.04791 10.5819 8.31387 11.3444 7.65183C12.1118 6.98548 12.8764 6.37216 13.4472 5.92664C13.7332 5.70347 14.0615 5.44902 14.4069 5.19463C14.8516 4.86712 15.4776 4.96211 15.8051 5.4068C15.9368 5.58556 16.0002 5.79362 16 5.99982V11.9999V17.9999C16.0002 18.2061 15.9368 18.4142 15.8051 18.593Z"
+            />
+          </svg>
+        </button>
+        <button
+          id="nextBtn"
+          class="absolute top-1/2 right-0 transform -translate-y-1/2"
+        >
+          <svg
+            class="fill-brand-dark cursor-pointer"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8.19486 5.40676C8.52237 4.96216 9.14837 4.86716 9.59306 5.19466C9.93847 5.44906 10.2668 5.70346 10.5528 5.92666C11.1236 6.37216 11.8882 6.98546 12.6556 7.65186C13.4181 8.31386 14.2064 9.04796 14.8119 9.73316C15.1136 10.0747 15.3911 10.4277 15.5986 10.7719C15.7895 11.0886 16 11.5238 16 11.9999C16 12.476 15.7895 12.9113 15.5986 13.228C15.3911 13.5722 15.1136 13.9251 14.8119 14.2666C14.2064 14.9518 13.4181 15.6859 12.6556 16.3479C11.8882 17.0143 11.1236 17.6276 10.5528 18.0731C10.2668 18.2963 9.93847 18.5507 9.59307 18.8051C9.14837 19.1326 8.52237 19.0376 8.19486 18.593C8.0632 18.4142 7.99983 18.2061 8 17.9999L8 11.9999V5.99986C7.99983 5.79366 8.0632 5.58556 8.19486 5.40676Z"
+            />
+          </svg>
+        </button>
+
+        <form
+          class="flex w-full h-full gap-14 scroll-smooth snap-mandatory overflow-hidden overflow-y-auto"
+          novalidate
+          method="get"
+          action="/index.html"
+          onsubmit=""
+        >
+          <!-- Page 1 -->
+          <div class="flex p-2 flex-col gap-6 flex-none w-full page"></div>
+          <!-- Page 2 -->
+          <div class="flex p-2 flex-col gap-6 flex-none w-full page"></div>
+          <!-- Page 3 -->
+          <div class="flex p-2 flex-col gap-6 flex-none w-full page"></div>
+          <!-- Page 4 -->
+          <div class="flex p-2 flex-col gap-6 flex-none w-full page">
+
+          </div>
+        </form>
+      </section>
+
+      <section
+        class="bg-brand-blue hidden lg:flex flex-col w-full h-full items-center justify-center"
+      >
+        <img
+          class="w-[500px] h-[500px]"
+          src="/assets/ilustration.png"
+          alt="Ilustração do Programa Trilhas"
+        />
+        <img
+          class="w-[212.25px] h-[26.49px]"
+          src="/assets/logo-trilhas-inova.svg"
+          alt="Logo do Programa Trilhas Inova"
+        />
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

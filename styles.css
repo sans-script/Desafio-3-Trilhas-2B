@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+*{
+  @apply font-poppins;
+}
+
+@theme {
+  
+  /* CORES DO DESIGN NO FIGMA */
+
+  /* Font */
+  --font-poppins: Poppins, sans-serif;
+  --text-heading-1: 32px;
+  --text-heading-2: 24px;
+  --text-heading-3: 20px;
+  --text-heading-4: 16px;
+
+  /* Brand */
+  --color-brand-light: #f67841;
+  --color-brand-mid: #f3541c;
+  --color-brand-dark: #e43a12;
+  --color-brand-blue: #2135a6;
+
+  /* Text */
+  --color-primary: #292524;
+  --color-secondary: #57534e;
+  --color-tertiary: #8f8881;
+  --color-highlight: #e43a12;
+
+  /* Surface */
+  --color-surface-primary: #ffffff;
+  --color-surface-secondary: #fee7d6;
+  --color-surface-secondary-8: rgba(254, 231, 214, 1);
+  --color-surface-disabled: #e7e5e4;
+
+  /* Stroke */
+  --color-stroke-default: #d6d3d1;
+  --color-stroke-highlight: #f3541c;
+
+  /* Semantic */
+  --color-semantic-error: #dc2626;
+}
+
+.custom-dropdown {
+  @apply relative inline-block;
+}
+
+.custom-dropdown select {
+  @apply appearance-none pr-8; /* pr-8 for padding-right: 2rem (32px) */
+}
+
+.custom-dropdown .dropdown-icon {
+  @apply absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none;
+}
+
+.hidden-page {
+  @apply hidden;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-brand-dark);
+  border-radius: 10px;
+  border: 3px solid var(--color-surface-primary);
+}
