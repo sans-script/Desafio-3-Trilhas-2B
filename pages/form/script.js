@@ -28,6 +28,15 @@ const singleWrapper = document.getElementById("checkboxWrapper");
 const singleUncheckedIcon = document.getElementById("uncheckedIcon");
 const singleCheckedIcon = document.getElementById("checkedIcon");
 
+const pages = document.querySelectorAll(".page");
+const pageContainer = document.getElementById("pageContainer");
+const formScroll = document.getElementById("formScroll")
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const totalpages = pages.length;
+
+let currentIndex = 0;
+
 // Função para atualizar informações do arquivo
 function updateFileInfo(inputId, infoDivId) {
   const input = document.getElementById(inputId);
@@ -358,13 +367,6 @@ document.querySelector("form").addEventListener("submit", function (e) {
   }
 });
 
-let currentIndex = 0;
-const pages = document.querySelectorAll(".page");
-const pageContainer = document.getElementById("pageContainer");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const totalpages = pages.length;
-
 function showpage(index) {
   if (index >= totalpages) {
     currentIndex = totalpages - 1; // Impede que vá além do último page
@@ -390,11 +392,13 @@ function showpage(index) {
 nextBtn.addEventListener("click", () => {
   currentIndex++;
   showpage(currentIndex);
+  formScroll.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 prevBtn.addEventListener("click", () => {
   currentIndex--;
   showpage(currentIndex);
+  formScroll.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 // Inicializa a página

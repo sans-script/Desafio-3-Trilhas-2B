@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulário de Incrição</title>
+    <link rel="stylesheet" href="/dist/output.css" />
+  </head>
+  <body class="m-0">
+    <!-- Container principal -->
+    <main class="flex h-screen overflow-hidden">
+      <!-- Quadrado da esquerda (Com pages) -->
+      <section
+        class="w-full lg:w-1/2 h-full flex flex-col items-center justify-center relative overflow-hidden"
+      >
+        <div class="flex flex-col gap-6 pt-16 pb-4 w-full max-w-[80%]">
+          <div class="flex gap-2">
+            <img src="/assets/arrow-left.svg" alt="Seta para a esquerda" />
+            <a href="#" class="text-secondary">Voltar</a>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h1 class="text-heading-2 font-semibold">
+              Formulário de inscrição
+            </h1>
+            <p class="text-heading-4 text-secondary font-normal">
+              Preencha os dados abaixo para fazer sua inscrição no Programa
+              Trilhas.
+            </p>
+          </div>
+        </div>
+        <!-- Apresentação de pages -->
+        <div
+          id="formScroll"
+          class="relative w-full h-full overflow-y-scroll overflow-x-hidden"
+        >
+          <!-- Contêiner de pages -->
+          <form
+            novalidate
+            method="get"
+            action="/index.html"
+            onsubmit=""
+            id="pageContainer"
+            class="transition-transform ease-in-out duration-800 flex w-full"
+          >
+            <!-- Page 1 -->
+            <div class="page w-full h-full flex items-center justify-center">
+              <div class="flex flex-col w-full h-full gap-6 max-w-[80%]">
+                <h2 class="font-semibold text-heading-4 text-primary">
+                  Informações do participante
+                </h2>
+                <div class="flex flex-col gap-1">
+                  <label
+                    class="text-secondary font-normal text-[14px] gap-1"
+                    for="nome"
+                    >Nome completo</label
+                  >
+                  <input
+                    class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    required
+                  />
+                  <div id="nome-error" class="items-center mt-2 hidden">
+                    <img
+                      class="w-5 h-5 mr-2"
+                      src="/assets/alert-circle.svg"
+                      alt="Error Icon"
+                    />
+                    <span class="text-red-600 text-[14px]"
+                      >Ops! Parece que você esqueceu de preencher o nome
+                      😵‍💫</span
+                    >
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-secondary font-normal text-[14px] gap-1"
+                    for="data-de-nascimento"
+                    >Data de nascimento</label
+                  >
+                  <input
+                    class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+                    type="text"
+                    id="date"
+                    name="data-de-nascimento"
+                    placeholder="dd/mm/aaaa"
+                    maxlength="10"
+                    required
+                  />
+                  <div id="birthdate-error" class="items-center mt-2 hidden">
+                    <img
+                      class="w-5 h-5 mr-2"
+                      src="/assets/alert-circle.svg"
+                      alt="Error Icon"
+                    />
+                    <span class="text-red-600 text-[14px] mt-1"
+                      >Parece que você esqueceu de preencher sua data de
+                      nascimento 😐</span
+                    >
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-secondary font-normal text-[14px] gap-1"
+                    for="cpf"
+                    >CPF</label
+                  >
+                  <input
+                    class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+                    type="text"
+                    id="cpf"
+                    name="cpf"
+                    maxlength="14"
+                    placeholder="000.000.000-00"
+                    required
+                  />
+                  <div id="cpf-error" class="items-center mt-2 hidden">
+                    <img
+                      class="w-5 h-5 mr-2"
+                      src="/assets/alert-circle.svg"
+                      alt="Error Icon"
+                    />
+                    <span class="text-red-600 text-[14px] mt-1"
+                      >Você esqueceu de informar o seu CPF 🫠</span
+                    >
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <label for="sexo" class="text-gray-700 text-sm font-medium"
+                    >Sexo</label
+                  >
+                  <div class="relative mt-1">
+                    <select
+                      id="sexo"
+                      class="w-full bg-white py-2 pr-10 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4"
+                    >
+                      <option>Selecionar</option>
+                      <option>Masculino</option>
+                      <option>Feminino</option>
+                      <option>Outro</option>
+                      <option>Prefiro não dizer</option>
+                    </select>
+                    <div
+                      class="absolute inset-y-0 right-3 flex items-center pointer-events-none"
+                    >
+                      <img
+                        src="/assets/arrow-down.svg"
+                        alt="Campo de sexo, seta para baixo"
+                      />
+                    </div>
+                  </div>
+                  <div id="sex-error" class="items-center mt-2 hidden">
+                    <img
+                      class="w-5 h-5 mr-2"
+                      src="/assets/alert-circle.svg"
+                      alt="Error Icon"
+                    />
+                    <span class="text-red-600 text-[14px] mt-1"
+                      >Opa! Você esqueceu de selecionar o sexo 😅</span
+                    >
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-secondary font-normal text-[14px] gap-1"
+                    for="email"
+                    >E-mail</label
+                  >
+                  <input
+                    class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="exemplo@exemplo.com"
+                    required
+                  />
+                  <div id="email-error" class="items-center mt-2 hidden">
+                    <img
+                      class="w-5 h-5 mr-2"
+                      src="/assets/alert-circle.svg"
+                      alt="Error Icon"
+                    />
+                    <span class="text-red-600 text-[14px] mt-1"
+                      >Oops! Parece que você esqueceu de preencher campo de
+                      e-mail 😅</span
+                    >
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-secondary font-normal text-[14px] gap-1"
+                    for="numero"
+                    >Telefone</label
+                  >
+                  <input
+                    class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+                    type="tel"
+                    id="phone"
+                    name="numero"
+                    maxlength="15"
+                    placeholder="(00) 00000-0000"
+                    required
+                  />
+                  <div id="phone-error" class="items-center mt-2 hidden">
+                    <img
+                      class="w-5 h-5 mr-2"
+                      src="/assets/alert-circle.svg"
+                      alt="Error Icon"
+                    />
+                    <span class="text-red-600 text-[14px] mt-1"
+                      >Ops! Parece que você esqueceu de preencher o número de
+                      telefone ☎️</span
+                    >
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <label
+                    class="text-secondary font-normal text-[14px] gap-1"
+                    for="documento"
+                    >Documento de identidade</label
+                  >
+                  <div
+                    class="border border-dashed border-stroke-default rounded-lg h-48 flex flex-col items-center justify-center cursor-pointer"
+                    onclick="document.getElementById('documento').click()"
+                  >
+                    <img
+                      src="/assets/cloud-upload.svg"
+                      alt="Upload Icon"
+                      class="w-12 h-12 mb-4"
+                    />
+                    <span
+                      class="text-[#A8A29E] font-normal text-heading-4 flex text-center"
+                      >Clique aqui para <br />
+                      selecionar o arquivo</span
+                    >
+                    <input
+                      class="hidden"
+                      type="file"
+                      id="documento"
+                      name="documento"
+                      onchange="updateIdFile()"
+                    />
+                  </div>
+                  <div
+                    id="file-info-identidade"
+                    class="flex items-center mt-2"
+                  ></div>
+                  <div id="file-id-error" class="items-center hidden">
+                    <img
+                      class="w-5 h-5 mr-2"
+                      src="/assets/alert-circle.svg"
+                      alt="Error Icon"
+                    />
+                    <span class="text-red-600 text-[14px] mt-1"
+                      >Você precisa escolher um arquivo 📂</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Page 2 -->
+            <div class="page w-full h-full flex items-center justify-center">
+              <div class="flex flex-col w-full h-full gap-6 max-w-[80%]">
+                <h2 class="font-semibold text-heading-4 text-primary">
+                  Endereço residencial
+                </h2>
+                <div class="flex flex-col gap-6">
+                  <div class="flex flex-col">
+                    <label
+                      class="text-secondary font-normal text-[14px] gap-1"
+                      for="cep"
+                      >CEP</label
+                    >
+                    <input
+                      class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+                      type="text"
+                      id="cep"
+                      name="cep"
+                      required
+                    />
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-col w-full">
+                      <label
+                        class="text-secondary font-normal text-[14px] gap-1"
+                        for="rua"
+                        >Rua</label
+                      >
+                      <input
+                        class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+                        type="text"
+                        id="rua"
+                        name="rua"
+                        required
+                      />
+                    </div>
+                    <div class="flex flex-col w-full md:w-60">
+                      <label
+                        class="text-secondary font-normal text-[14px] gap-1"
+                        for="numero"
+                        >Número</label
+                      >
+                      <input
+                        class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+                        type="number"
+                        id="numero"
+                        name="numero-casa"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-col w-full">
+                      <label
+                        class="text-secondary font-normal text-[14px] gap-1"
+                        for="cidade"
+                        >Cidade</label
+                      >
+                      <input
+                        class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+                        type="text"
+                        id="cidade"
+                        name="cidade"
+                        required
+                      />
+                    </div>
+                    <div class="flex flex-col w-full md:w-60">
+                      <label
+                        class="text-secondary font-normal text-[14px] gap-1"
+                        for="estado"
+                        >Estado</label
+                      >
+                      <input
+                        class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+                        type="text"
+                        id="estado"
+                        name="estado"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div id="adress-error" class="items-center -mt-2 hidden">
+                    <img
+                      class="w-5 h-5 mr-2 -mt-1"
+                      src="/assets/alert-circle.svg"
+                      alt="Error Icon"
+                    />
+                    <span class="text-red-600 text-[14px]"
+                      >Parece que você esqueceu de preencher alguma informação
+                      de endereço 🏠</span
+                    >
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label
+                      class="text-secondary font-normal text-[14px] gap-1"
+                      for="comprovante"
+                      >Comprovante de residência</label
+                    >
+                    <div
+                      class="border border-dashed border-stroke-default rounded-lg h-48 flex flex-col items-center justify-center cursor-pointer"
+                      onclick="document.getElementById('comprovante').click()"
+                    >
+                      <img
+                        src="/assets/cloud-upload.svg"
+                        alt="Upload Icon"
+                        class="w-12 h-12 mb-4"
+                      />
+                      <span
+                        class="text-[#A8A29E] font-normal text-heading-4 flex text-center"
+                        >Clique aqui para <br />
+                        selecionar o arquivo</span
+                      >
+                      <input
+                        class="hidden"
+                        type="file"
+                        id="comprovante"
+                        name="comprovante"
+                        onchange="updateResidenceProofFile()"
+                      />
+                    </div>
+                    <div
+                      id="file-info-comprovante"
+                      class="flex items-center mt-2"
+                    ></div>
+                    <div id="file-proof-error" class="items-center hidden">
+                      <img
+                        class="w-5 h-5 mr-2"
+                        src="/assets/alert-circle.svg"
+                        alt="Error Icon"
+                      />
+                      <span class="text-red-600 text-[14px] mt-1"
+                        >Você precisa escolher um arquivo 📂</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Page 3 -->
+            <div class="page w-full h-full flex items-center justify-center">
+              <div class="flex flex-col w-full h-full gap-6 max-w-[80%]">
+                <h2 class="font-semibold text-heading-4 text-primary">
+                  Trilhas de aprendizado
+                </h2>
+                <p class="text-secondary font-normal text-[14px] gap-1">
+                  Selecione apenas uma trilha
+                </p>
+                <div class="grid grid-cols-2 grid-rows-3 gap-6">
+                  <div
+                    class="checkboxWrapper cursor-pointer text-center flex relative flex-col items-center gap-2.5 justify-center border-2 border-stroke-default rounded-lg p-6"
+                  >
+                    <label
+                      class="flex items-center justify-center w-6 h-6 cursor-pointer absolute left-2 top-2"
+                    >
+                      <input
+                        type="checkbox"
+                        name="customCheckboxGroup"
+                        class="hidden customCheckbox"
+                        required
+                      />
+                      <svg
+                        class="uncheckedIcon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                          stroke="#D6D3D1"
+                          stroke-width="1.5"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <svg
+                        class="checkedIcon hidden"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M12 22.75C6.06294 22.75 1.25 17.9371 1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75ZM16.48 9.37756C16.9645 9.11257 17.1425 8.50493 16.8775 8.02038C16.6125 7.53582 16.0049 7.35782 15.5204 7.62282C13.6917 8.62286 12.1796 10.5529 11.1629 12.1096C10.7872 12.685 10.4662 13.2297 10.2094 13.6911C9.96984 13.4587 9.73258 13.257 9.52038 13.0892C9.2427 12.8697 8.99282 12.6965 8.81063 12.5772L8.49559 12.3815C8.01585 12.1079 7.40513 12.275 7.13152 12.7548C6.85797 13.2344 7.02493 13.8449 7.50442 14.1187L7.71471 14.2502C7.85752 14.3437 8.05764 14.4823 8.27997 14.6581C8.73753 15.0198 9.23126 15.494 9.54198 16.0135C9.73267 16.3323 10.0844 16.5191 10.4553 16.4987C10.8261 16.4782 11.1551 16.2536 11.3096 15.9159L11.4079 15.7105C11.4756 15.5721 11.577 15.3697 11.709 15.1204C11.9735 14.6207 12.3581 13.9372 12.8374 13.2032C13.8208 11.6975 15.1086 10.1275 16.48 9.37756Z"
+                          fill="#F3541C"
+                        />
+                      </svg>
+                    </label>
+                    <img
+                      class="w-[40px] h-[40px]"
+                      src="/assets/front-end-icon.svg"
+                      alt="Ícone de Programação Front-end"
+                    />
+                    <span> Programação Front-end </span>
+                  </div>
+                  <div
+                    class="checkboxWrapper cursor-pointer text-center flex relative flex-col items-center gap-2.5 justify-center border-2 border-stroke-default rounded-lg p-6"
+                  >
+                    <label
+                      class="flex items-center justify-center w-6 h-6 cursor-pointer absolute left-2 top-2"
+                    >
+                      <input
+                        type="checkbox"
+                        name="customCheckboxGroup"
+                        class="hidden customCheckbox"
+                        required
+                      />
+                      <svg
+                        class="uncheckedIcon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                          stroke="#D6D3D1"
+                          stroke-width="1.5"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <svg
+                        class="checkedIcon hidden"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M12 22.75C6.06294 22.75 1.25 17.9371 1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75ZM16.48 9.37756C16.9645 9.11257 17.1425 8.50493 16.8775 8.02038C16.6125 7.53582 16.0049 7.35782 15.5204 7.62282C13.6917 8.62286 12.1796 10.5529 11.1629 12.1096C10.7872 12.685 10.4662 13.2297 10.2094 13.6911C9.96984 13.4587 9.73258 13.257 9.52038 13.0892C9.2427 12.8697 8.99282 12.6965 8.81063 12.5772L8.49559 12.3815C8.01585 12.1079 7.40513 12.275 7.13152 12.7548C6.85797 13.2344 7.02493 13.8449 7.50442 14.1187L7.71471 14.2502C7.85752 14.3437 8.05764 14.4823 8.27997 14.6581C8.73753 15.0198 9.23126 15.494 9.54198 16.0135C9.73267 16.3323 10.0844 16.5191 10.4553 16.4987C10.8261 16.4782 11.1551 16.2536 11.3096 15.9159L11.4079 15.7105C11.4756 15.5721 11.577 15.3697 11.709 15.1204C11.9735 14.6207 12.3581 13.9372 12.8374 13.2032C13.8208 11.6975 15.1086 10.1275 16.48 9.37756Z"
+                          fill="#F3541C"
+                        />
+                      </svg>
+                    </label>
+                    <img
+                      class="w-[40px] h-[40px]"
+                      src="/assets/back-end-icon.svg"
+                      alt="Ícone de Programação Back-end"
+                    />
+                    <span> Programação Back-end </span>
+                  </div>
+                  <div
+                    class="checkboxWrapper cursor-pointer text-center flex relative flex-col items-center gap-2.5 justify-center border-2 border-stroke-default rounded-lg p-6"
+                  >
+                    <label
+                      class="flex items-center justify-center w-6 h-6 cursor-pointer absolute left-2 top-2"
+                    >
+                      <input
+                        type="checkbox"
+                        name="customCheckboxGroup"
+                        class="hidden customCheckbox"
+                        required
+                      />
+                      <svg
+                        class="uncheckedIcon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                          stroke="#D6D3D1"
+                          stroke-width="1.5"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <svg
+                        class="checkedIcon hidden"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M12 22.75C6.06294 22.75 1.25 17.9371 1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75ZM16.48 9.37756C16.9645 9.11257 17.1425 8.50493 16.8775 8.02038C16.6125 7.53582 16.0049 7.35782 15.5204 7.62282C13.6917 8.62286 12.1796 10.5529 11.1629 12.1096C10.7872 12.685 10.4662 13.2297 10.2094 13.6911C9.96984 13.4587 9.73258 13.257 9.52038 13.0892C9.2427 12.8697 8.99282 12.6965 8.81063 12.5772L8.49559 12.3815C8.01585 12.1079 7.40513 12.275 7.13152 12.7548C6.85797 13.2344 7.02493 13.8449 7.50442 14.1187L7.71471 14.2502C7.85752 14.3437 8.05764 14.4823 8.27997 14.6581C8.73753 15.0198 9.23126 15.494 9.54198 16.0135C9.73267 16.3323 10.0844 16.5191 10.4553 16.4987C10.8261 16.4782 11.1551 16.2536 11.3096 15.9159L11.4079 15.7105C11.4756 15.5721 11.577 15.3697 11.709 15.1204C11.9735 14.6207 12.3581 13.9372 12.8374 13.2032C13.8208 11.6975 15.1086 10.1275 16.48 9.37756Z"
+                          fill="#F3541C"
+                        />
+                      </svg>
+                    </label>
+                    <img
+                      class="w-[40px] h-[40px]"
+                      src="/assets/games-icon.svg"
+                      alt="Ícone de Programação de Jogos"
+                    />
+                    <span> Programação de Jogos </span>
+                  </div>
+                  <div
+                    class="checkboxWrapper cursor-pointer text-center flex relative flex-col items-center gap-2.5 justify-center border-2 border-stroke-default rounded-lg p-6"
+                  >
+                    <label
+                      class="flex items-center justify-center w-6 h-6 cursor-pointer absolute left-2 top-2"
+                    >
+                      <input
+                        type="checkbox"
+                        name="customCheckboxGroup"
+                        class="hidden customCheckbox"
+                        required
+                      />
+                      <svg
+                        class="uncheckedIcon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                          stroke="#D6D3D1"
+                          stroke-width="1.5"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <svg
+                        class="checkedIcon hidden"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M12 22.75C6.06294 22.75 1.25 17.9371 1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75ZM16.48 9.37756C16.9645 9.11257 17.1425 8.50493 16.8775 8.02038C16.6125 7.53582 16.0049 7.35782 15.5204 7.62282C13.6917 8.62286 12.1796 10.5529 11.1629 12.1096C10.7872 12.685 10.4662 13.2297 10.2094 13.6911C9.96984 13.4587 9.73258 13.257 9.52038 13.0892C9.2427 12.8697 8.99282 12.6965 8.81063 12.5772L8.49559 12.3815C8.01585 12.1079 7.40513 12.275 7.13152 12.7548C6.85797 13.2344 7.02493 13.8449 7.50442 14.1187L7.71471 14.2502C7.85752 14.3437 8.05764 14.4823 8.27997 14.6581C8.73753 15.0198 9.23126 15.494 9.54198 16.0135C9.73267 16.3323 10.0844 16.5191 10.4553 16.4987C10.8261 16.4782 11.1551 16.2536 11.3096 15.9159L11.4079 15.7105C11.4756 15.5721 11.577 15.3697 11.709 15.1204C11.9735 14.6207 12.3581 13.9372 12.8374 13.2032C13.8208 11.6975 15.1086 10.1275 16.48 9.37756Z"
+                          fill="#F3541C"
+                        />
+                      </svg>
+                    </label>
+                    <img
+                      class="w-[40px] h-[40px]"
+                      src="/assets/ux-design-icon.svg"
+                      alt="Ícone de Design e Experiência"
+                    />
+                    <span> Design e Experiência </span>
+                  </div>
+                  <div
+                    class="checkboxWrapper cursor-pointer text-center flex relative flex-col items-center gap-2.5 justify-center border-2 border-stroke-default rounded-lg p-6"
+                  >
+                    <label
+                      class="flex items-center justify-center w-6 h-6 cursor-pointer absolute left-2 top-2"
+                    >
+                      <input
+                        type="checkbox"
+                        name="customCheckboxGroup"
+                        class="hidden customCheckbox"
+                        required
+                      />
+                      <svg
+                        class="uncheckedIcon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                          stroke="#D6D3D1"
+                          stroke-width="1.5"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <svg
+                        class="checkedIcon hidden"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M12 22.75C6.06294 22.75 1.25 17.9371 1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75ZM16.48 9.37756C16.9645 9.11257 17.1425 8.50493 16.8775 8.02038C16.6125 7.53582 16.0049 7.35782 15.5204 7.62282C13.6917 8.62286 12.1796 10.5529 11.1629 12.1096C10.7872 12.685 10.4662 13.2297 10.2094 13.6911C9.96984 13.4587 9.73258 13.257 9.52038 13.0892C9.2427 12.8697 8.99282 12.6965 8.81063 12.5772L8.49559 12.3815C8.01585 12.1079 7.40513 12.275 7.13152 12.7548C6.85797 13.2344 7.02493 13.8449 7.50442 14.1187L7.71471 14.2502C7.85752 14.3437 8.05764 14.4823 8.27997 14.6581C8.73753 15.0198 9.23126 15.494 9.54198 16.0135C9.73267 16.3323 10.0844 16.5191 10.4553 16.4987C10.8261 16.4782 11.1551 16.2536 11.3096 15.9159L11.4079 15.7105C11.4756 15.5721 11.577 15.3697 11.709 15.1204C11.9735 14.6207 12.3581 13.9372 12.8374 13.2032C13.8208 11.6975 15.1086 10.1275 16.48 9.37756Z"
+                          fill="#F3541C"
+                        />
+                      </svg>
+                    </label>
+                    <img
+                      class="w-[40px] h-[40px]"
+                      src="/assets/data-science-icon.svg"
+                      alt="Ícone de Ciência de Dados"
+                    />
+                    <span> Ciência de Dados </span>
+                  </div>
+                </div>
+                <div id="trilhas-error" class="items-center hidden">
+                  <img
+                    class="w-5 h-5 mr-2"
+                    src="/assets/alert-circle.svg"
+                    alt="Error Icon"
+                  />
+                  <span class="text-red-600 text-[14px]"
+                    >Minha mãe sempre dizia: nunca esqueça da sua trilha de
+                    aprendizado 🍃</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Page 4 -->
+            <div class="page w-full h-full flex items-center justify-center">
+              <div class="flex flex-col w-full h-full gap-6 max-w-[80%]">
+                <div class="flex flex-col mt-6 gap-3">
+                  <div class="flex gap-3">
+                    <label
+                      id="checkboxWrapper"
+                      class="relative flex items-center justify-center w-6 h-6 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        id="customCheckbox"
+                        class="hidden"
+                        required
+                      />
+                      <svg
+                        id="uncheckedIcon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z"
+                          fill="white"
+                          stroke="#D6D3D1"
+                          stroke-width="1.5"
+                        />
+                      </svg>
+
+                      <svg
+                        id="checkedIcon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z"
+                          stroke="#F3541C"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M12 22C2.9997 22 2 21 2 12C2 3 2.9997 2 12 2C21.0003 2 22 3 22 12C22 21 21.0003 22 12 22ZM16.2304 9.12756C16.7149 8.86257 16.8929 8.25493 16.6279 7.77038C16.3629 7.28582 15.7553 7.10782 15.2708 7.37282C13.4421 8.37286 11.93 10.3029 10.9133 11.8596C10.5376 12.435 10.2166 12.9797 9.95984 13.4411C9.72028 13.2087 9.48302 13.007 9.27082 12.8392C8.99314 12.6197 8.74326 12.4465 8.56107 12.3272L8.24603 12.1315C7.76629 11.8579 7.15557 12.025 6.88196 12.5048C6.60841 12.9844 6.77537 13.5949 7.25486 13.8687L7.46515 14.0002C7.60796 14.0937 7.80808 14.2323 8.03041 14.4081C8.48797 14.7698 8.9817 15.244 9.29242 15.7635C9.48311 16.0823 9.83484 16.2691 10.2057 16.2487C10.5765 16.2282 10.9055 16.0036 11.06 15.6659L11.1583 15.4605C11.226 15.3221 11.3274 15.1197 11.4594 14.8704C11.7239 14.3707 12.1085 13.6872 12.5878 12.9532C13.5712 11.4475 14.859 9.8775 16.2304 9.12756Z"
+                          fill="#F3541C"
+                        />
+                      </svg>
+                    </label>
+
+                    <!-- Termos e Condições -->
+                    <label
+                      for="termos"
+                      class="text-secondary font-normal text-[14px] gap-1 mt-1"
+                    >
+                      Declaro que li e concordo com os
+                      <a href="#" class="text-highlight">Termos e Condições</a>
+                      e com a
+                      <a href="#" class="text-highlight"
+                        >Política de Privacidade</a
+                      >.
+                    </label>
+                  </div>
+                  <div id="termos-error" class="items-center hidden">
+                    <img
+                      class="w-5 h-5 mr-2"
+                      src="/assets/alert-circle.svg"
+                      alt="Error Icon"
+                    />
+                    <span class="text-red-600 text-[14px] mt-1"
+                      >Você precisa concordar com os Termos e Condições e a
+                      Política de Privacidade 📜</span
+                    >
+                  </div>
+                </div>
+                <!-- Botões -->
+                <div class="flex mt-6 gap-4 justify-end">
+                  <button
+                    type="button"
+                    class="border border-highlight rounded-lg px-6 py-2 text-highlight cursor-pointer"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    class="bg-highlight text-white rounded-lg px-6 py-2 cursor-pointer"
+                  >
+                    Fazer inscrição
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- Botões de navegação -->
+        <button
+          id="prevBtn"
+          class="absolute top-1/2 left-0 transform -translate-y-1/2"
+        >
+          <svg
+            class="fill-brand-dark cursor-pointer"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15.8051 18.593C15.4776 19.0376 14.8516 19.1326 14.4069 18.8051C14.0615 18.5507 13.7332 18.2963 13.4472 18.0731C12.8764 17.6276 12.1118 17.0143 11.3444 16.3479C10.5819 15.6859 9.7936 14.9518 9.1881 14.2666C8.8864 13.9251 8.6089 13.5721 8.4014 13.2279C8.2105 12.9112 8 12.476 8 11.9999C8 11.5238 8.2105 11.0885 8.4014 10.7718C8.6089 10.4276 8.8864 10.0747 9.1881 9.7332C9.7936 9.04791 10.5819 8.31387 11.3444 7.65183C12.1118 6.98548 12.8764 6.37216 13.4472 5.92664C13.7332 5.70347 14.0615 5.44902 14.4069 5.19463C14.8516 4.86712 15.4776 4.96211 15.8051 5.4068C15.9368 5.58556 16.0002 5.79362 16 5.99982V11.9999V17.9999C16.0002 18.2061 15.9368 18.4142 15.8051 18.593Z"
+            />
+          </svg>
+        </button>
+        <button
+          id="nextBtn"
+          class="absolute top-1/2 right-0 transform -translate-y-1/2"
+        >
+          <svg
+            class="fill-brand-dark cursor-pointer"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8.19486 5.40676C8.52237 4.96216 9.14837 4.86716 9.59306 5.19466C9.93847 5.44906 10.2668 5.70346 10.5528 5.92666C11.1236 6.37216 11.8882 6.98546 12.6556 7.65186C13.4181 8.31386 14.2064 9.04796 14.8119 9.73316C15.1136 10.0747 15.3911 10.4277 15.5986 10.7719C15.7895 11.0886 16 11.5238 16 11.9999C16 12.476 15.7895 12.9113 15.5986 13.228C15.3911 13.5722 15.1136 13.9251 14.8119 14.2666C14.2064 14.9518 13.4181 15.6859 12.6556 16.3479C11.8882 17.0143 11.1236 17.6276 10.5528 18.0731C10.2668 18.2963 9.93847 18.5507 9.59307 18.8051C9.14837 19.1326 8.52237 19.0376 8.19486 18.593C8.0632 18.4142 7.99983 18.2061 8 17.9999L8 11.9999V5.99986C7.99983 5.79366 8.0632 5.58556 8.19486 5.40676Z"
+            />
+          </svg>
+        </button>
+      </section>
+
+      <section
+        class="bg-brand-blue hidden lg:flex flex-col w-1/2 h-full items-center justify-center"
+      >
+        <img
+          class="w-[500px] h-[500px]"
+          src="/assets/ilustration.png"
+          alt="Ilustração do Programa Trilhas"
+        />
+        <img
+          class="w-[212.25px] h-[26.49px]"
+          src="/assets/logo-trilhas-inova.svg"
+          alt="Logo do Programa Trilhas Inova"
+        />
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
