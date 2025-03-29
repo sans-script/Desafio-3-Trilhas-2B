@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cadastro / Login</title>
+    <link rel="stylesheet" href="/dist/output.css" />
+  </head>
+  <body
+    class="bg-[url(/assets/bg.png)] bg-cover bg-center bg-fixed flex justify-center items-center h-screen m-0 overflow-hidden"
+  >
+    <div>
+      <img
+        src="/assets/fita_canto_superior_esquerdo.png"
+        class="absolute pointer-events-none top-0 left-0 w-60 lg:w-96"
+        alt=""
+      />
+      <img
+        src="/assets/fita_canto_inferior_direito.png"
+        class="absolute pointer-events-none bottom-0 right-0 w-60 lg:w-96"
+        alt=""
+      />
+      <img
+        src="/assets/trilhas_inovação_sticker.png"
+        class="absolute pointer-events-none top-10 right-10 w-44 lg:w-64"
+        alt=""
+      />
+      <img
+        src="/assets/inovação_começa_com_conhecimento.png"
+        class="absolute pointer-events-none bottom-5 left-5 w-40 lg:w-44"
+        alt=""
+      />
+    </div>
+
+    <div class="bg-white/95 p-8 rounded-lg shadow-lg w-4/5 max-w-96 z-10">
+      <h2
+        id="form-title"
+        class="mb-5 text-2xl text-blue-600 text-center font-semibold text-heading-3"
+      ></h2>
+      <!-- Formulário de Cadastro -->
+      <form
+        novalidate
+        method="get"
+        action="/index.html"
+        onsubmit=""
+        id="register-form"
+        class="flex flex-col gap-6"
+      >
+        <div class="flex flex-col gap-1">
+          <label
+            class="text-secondary font-normal text-[14px] gap-1"
+            for="register-cpf"
+            >CPF</label
+          >
+          <input
+            class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+            type="text"
+            id="register-cpf"
+            placeholder="CPF"
+            required
+          />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label
+            class="text-secondary font-normal text-[14px] gap-1"
+            for="register-password"
+            >Cadastrar Senha</label
+          >
+          <input
+            class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+            type="password"
+            id="register-password"
+            placeholder="Cadastrar Senha"
+            required
+          />
+        </div>
+        <input
+          class="bg-highlight text-white rounded-lg px-6 py-2 cursor-pointer"
+          type="submit"
+          value="Salvar"
+        />
+      </form>
+
+      <!-- Formulário de Login -->
+      <form
+        novalidate
+        method="get"
+        action="/index.html"
+        onsubmit=""
+        id="login-form"
+        class="hidden flex-col gap-6"
+      >
+        <div class="flex flex-col gap-1">
+          <label
+            class="text-secondary font-normal text-[14px] gap-1"
+            for="login-cpf"
+            >CPF</label
+          >
+          <input
+            class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+            type="text"
+            id="login-cpf"
+            placeholder="CPF"
+            required
+          />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label
+            class="text-secondary font-normal text-[14px] gap-1"
+            for="login-password"
+            >Senha</label
+          >
+          <input
+            class="border border-stroke-default rounded-lg h-12 appearance-none focus:outline-none px-4 shadow-sm"
+            type="password"
+            id="login-password"
+            placeholder="Senha"
+            required
+          />
+        </div>
+        <input
+          class="bg-highlight text-white rounded-lg px-6 py-2 cursor-pointer"
+          type="submit"
+          value="Entrar"
+        />
+      </form>
+
+      <a
+        class="block mt-4 text-gray-500 text-xs no-underline hover:text-blue-600 hover:underline text-center"
+        href="#"
+        id="toggle-link"
+      >
+        Já tem uma conta? Login
+      </a>
+      <p class="text-center" id="message"></p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
