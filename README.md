@@ -91,3 +91,12 @@ Para subir as alterações feitas no projeto, siga os passos abaixo:
    ```sh
    git push origin main
    ```
+
+
+O que precisa ser feito:
+
+O usuário entra na página de cadastro se não tiver login, caso não tenha um login, ele precisa realizar o cadastro dele.
+
+Depois ele é encaminhado pra home, na home será exibido os dados de incrição enviados por meio do formulário de incrição, caso ele não tenha preenchido esse formulário, deve aparecer um aviso de inscriçao não realizada e um link pro formulário.
+
+Após ter feito o envio dos dados, ele deve voltar pra home e lá deve constar os dados dele que ele enviou e a situação de inscrito no programa. Essa notificação de incrição deve ser enviada no email do candidato
