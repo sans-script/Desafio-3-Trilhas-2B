@@ -30,7 +30,7 @@ const singleCheckedIcon = document.getElementById("checkedIcon");
 
 const pages = document.querySelectorAll(".page");
 const pageContainer = document.getElementById("pageContainer");
-const formScroll = document.getElementById("formScroll")
+const formScroll = document.getElementById("formScroll");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const totalpages = pages.length;
@@ -403,3 +403,49 @@ prevBtn.addEventListener("click", () => {
 
 // Inicializa a página
 showpage(currentIndex);
+
+document.querySelector("form").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const userId = localStorage.getItem("userId"); // Recupera o ID do usuário logado
+
+  const data = {
+    usuario_id: userId, // Vincula a inscrição ao usuário logado
+    nome: formData.get("nome"),
+    data_nascimento: formData.get("data-de-nascimento"),
+    cpf: formData.get("cpf"),
+    sexo: formData.get("sexo"),
+    email: formData.get("email"),
+    telefone: formData.get("numero"),
+    endereco: {
+      cep: formData.get("cep"),
+      rua: formData.get("rua"),
+      numero: formData.get("numero-casa"),
+      cidade: formData.get("cidade"),
+      estado: formData.get("estado"),
+    },
+    trilha: formData.get("customCheckboxGroup"),
+    documento: formData.get("documento"),
+    comprovante: formData.get("comprovante"),
+  };
+
+  try {
+    const response = await fetch("http://localhost:3000/api/inscricao", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      alert("Inscrição realizada com sucesso!");
+      window.location.href = "/pages/home/index.html";
+    } else {
+      const error = await response.json();
+      alert(error.error || "Erro ao realizar inscrição.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao conectar ao servidor.");
+  }
+});
