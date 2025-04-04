@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const pool = require("./db");
 const bodyParser = require("body-parser");
@@ -10,7 +11,7 @@ app.use(bodyParser.json({ limit: "10mb" })); // Aumenta o limite para 10 MB
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true })); // Para dados codificados em URL
 
 const cors = require("cors");
-app.use(cors());
+app.use(cors({ origin: "*" }));
 
 // Rota de cadastro
 app.post("/register", async (req, res) => {
