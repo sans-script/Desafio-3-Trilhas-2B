@@ -54,20 +54,23 @@ document.getElementById("login-cpf").addEventListener("input", (e) => {
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const cpf = document.getElementById("register-cpf").value;
+  let cpf = document.getElementById("register-cpf").value;
   const senha = document.getElementById("register-password").value;
+
+  // Remove a máscara do CPF
+  cpf = cpf.replace(/\D/g, ""); // Garante que o CPF esteja sem formatação
 
   try {
     const response = await fetch("http://localhost:3000/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: cpf, senha }), // Usando CPF como e-mail
+      body: JSON.stringify({ cpf, senha }),
     });
 
     if (response.ok) {
       const data = await response.json();
       alert("Cadastro realizado com sucesso!");
-      localStorage.setItem("userId", data.user.id); // Salva o ID do usuário no localStorage
+      localStorage.setItem("cpf", cpf); // Salva o CPF sem formatação no localStorage
       toggleLink.click(); // Alterna para o formulário de login
     } else {
       const error = await response.json();
@@ -82,21 +85,23 @@ registerForm.addEventListener("submit", async (e) => {
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const cpf = document.getElementById("login-cpf").value;
+  let cpf = document.getElementById("login-cpf").value;
   const senha = document.getElementById("login-password").value;
+
+  // Remove a máscara do CPF
+  cpf = cpf.replace(/\D/g, ""); // Garante que o CPF esteja sem formatação
 
   try {
     const response = await fetch("http://localhost:3000/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: cpf, senha }), // Usando CPF como e-mail
+      body: JSON.stringify({ cpf, senha }),
     });
 
     if (response.ok) {
       const data = await response.json();
       alert("Login realizado com sucesso!");
-      localStorage.setItem("userId", data.user.id); // Salva o ID do usuário no localStorage
-      console.log("User ID saved to localStorage:", data.user.id); // Debugging log
+      localStorage.setItem("cpf", cpf); // Salva o CPF sem formatação no localStorage
       window.location.href = "/pages/home/index.html"; // Redireciona para a home
     } else {
       const error = await response.json();
