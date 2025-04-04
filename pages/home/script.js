@@ -41,12 +41,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const welcomeText = document.getElementById("welcome-text");
   const timerElement = document.getElementById("session-timer");
   const logoutButton = document.getElementById("logout-button");
-
+  // Use http://localhost:3000 no lugar de https://desafio-3-trilhas-2b.onrender.com para rodar localmente
   try {
     // Faz a requisição para buscar os dados de inscrição
     const sanitizedCpf = cpf.replace(/\D/g, ""); // Remove caracteres não numéricos
     const response = await fetch(
-      `http://localhost:3000/api/inscricao/${sanitizedCpf}`
+      `https://desafio-3-trilhas-2b.onrender.com/api/inscricao/${sanitizedCpf}`
     );
 
     if (response.status === 404) {
@@ -140,12 +140,12 @@ document.addEventListener("DOMContentLoaded", async () => {
               <div class="flex flex-col">
                 <label class="text-secondary font-normal text-[14px]">Documentos</label>
                 <div class="flex gap-2 w-full">
-                  <a href="http://localhost:3000/api/inscricao/${
+                  <a href="https://desafio-3-trilhas-2b.onrender.com/api/inscricao/${
                     inscricao.cpf
                   }/documento" class="w-full text-center justify-center border text-[12px] border-dashed rounded-lg h-12 px-4 flex items-center text-brand-blue">
                     Documento de Identidade
                   </a>
-                  <a href="http://localhost:3000/api/inscricao/${
+                  <a href="https://desafio-3-trilhas-2b.onrender.com/api/inscricao/${
                     inscricao.cpf
                   }/comprovante" class="w-full text-center justify-center border text-[12px] border-dashed rounded-lg h-12 px-4 flex items-center text-brand-blue">
                     Comprovante de Residência

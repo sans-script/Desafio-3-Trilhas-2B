@@ -61,11 +61,14 @@ registerForm.addEventListener("submit", async (e) => {
   cpf = cpf.replace(/\D/g, ""); // Garante que o CPF esteja sem formatação
 
   try {
-    const response = await fetch("http://localhost:3000/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cpf, senha }),
-    });
+    const response = await fetch(
+      "https://desafio-3-trilhas-2b.onrender.com/register",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cpf, senha }),
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();
@@ -90,13 +93,17 @@ loginForm.addEventListener("submit", async (e) => {
 
   // Remove a máscara do CPF
   cpf = cpf.replace(/\D/g, ""); // Garante que o CPF esteja sem formatação
-
+  
+  // Use http://localhost:3000 no lugar de https://desafio-3-trilhas-2b.onrender.com para rodar localmente
   try {
-    const response = await fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cpf, senha }),
-    });
+    const response = await fetch(
+      "https://desafio-3-trilhas-2b.onrender.com/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cpf, senha }),
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();

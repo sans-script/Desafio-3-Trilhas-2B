@@ -438,7 +438,8 @@ document.querySelector("form").addEventListener("submit", async function (e) {
   };
 
   try {
-    const response = await fetch("http://localhost:3000/api/inscricao", {
+      // Use http://localhost:3000 no lugar de https://desafio-3-trilhas-2b.onrender.com para rodar localmente
+    const response = await fetch("https://desafio-3-trilhas-2b.onrender.com/api/inscricao", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
