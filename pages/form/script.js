@@ -408,16 +408,23 @@ document.querySelector("form").addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const formData = new FormData(this);
-  const userId = localStorage.getItem("userId"); // Recupera o ID do usuário logado
+
+  // Converte os arquivos para base64
+  const documentoFile = formData.get("documento");
+  const comprovanteFile = formData.get("comprovante");
+
+  const documentoBase64 = documentoFile ? await toBase64(documentoFile) : null;
+  const comprovanteBase64 = comprovanteFile
+    ? await toBase64(comprovanteFile)
+    : null;
 
   const data = {
-    usuario_id: userId, // Vincula a inscrição ao usuário logado
     nome: formData.get("nome"),
     data_nascimento: formData.get("data-de-nascimento"),
-    cpf: formData.get("cpf"),
+    cpf: formData.get("cpf").replace(/\D/g, ""), // Remove a máscara do CPF
     sexo: formData.get("sexo"),
     email: formData.get("email"),
-    telefone: formData.get("numero"),
+    telefone: formData.get("numero").replace(/\D/g, ""), // Remove a máscara do telefone
     endereco: {
       cep: formData.get("cep"),
       rua: formData.get("rua"),
@@ -426,8 +433,8 @@ document.querySelector("form").addEventListener("submit", async function (e) {
       estado: formData.get("estado"),
     },
     trilha: formData.get("customCheckboxGroup"),
-    documento: formData.get("documento"),
-    comprovante: formData.get("comprovante"),
+    documento: documentoBase64,
+    comprovante: comprovanteBase64,
   };
 
   try {
@@ -449,3 +456,13 @@ document.querySelector("form").addEventListener("submit", async function (e) {
     alert("Erro ao conectar ao servidor.");
   }
 });
+
+// Função para converter arquivo em base64
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]); // Remove o prefixo "data:..."
+    reader.onerror = (error) => reject(error);
+    reader.readAsDataURL(file);
+  });
+}
