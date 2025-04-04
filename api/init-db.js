@@ -6,16 +6,15 @@ const pool = require("./db");
     await pool.query(`
       CREATE TABLE IF NOT EXISTS usuarios (
         id SERIAL PRIMARY KEY,
-        email VARCHAR(255) UNIQUE NOT NULL,
+        cpf VARCHAR(14) UNIQUE NOT NULL, -- Alterado de email para cpf
         senha VARCHAR(255) NOT NULL
       );
     `);
 
-    // Criação da tabela de inscrições com relação ao usuário
+    // Criação da tabela de inscrições sem a coluna usuario_id
     await pool.query(`
       CREATE TABLE IF NOT EXISTS inscricoes (
         id SERIAL PRIMARY KEY,
-        usuario_id INT REFERENCES usuarios(id) ON DELETE CASCADE,
         nome VARCHAR(255),
         data_nascimento DATE,
         cpf VARCHAR(14) UNIQUE,
