@@ -11,7 +11,7 @@ app.use(bodyParser.json({ limit: "10mb" })); // Aumenta o limite para 10 MB
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true })); // Para dados codificados em URL
 
 const cors = require("cors");
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: "https://desafio-3-trilhas-2-b.vercel.app" }));
 
 // Rota de cadastro
 app.post("/register", async (req, res) => {
