@@ -37,8 +37,9 @@ const totalpages = pages.length;
 
 let currentIndex = 0;
 
-// https://desafio-3-trilhas-2b.onrender.com
-let BASE_URL = "http://localhost:3000";
+// https://desafio-3-trilhas-2b.onrender.com para produção
+// http://localhost:3000 para desenvolvimento
+let BASE_URL = "https://desafio-3-trilhas-2b.onrender.com";
 
 function updateFileInfo(inputId, infoDivId) {
   const input = document.getElementById(inputId);

@@ -41,8 +41,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const welcomeText = document.getElementById("welcome-text");
   const timerElement = document.getElementById("session-timer");
   const logoutButton = document.getElementById("logout-button");
-  // https://desafio-3-trilhas-2b.onrender.com
-  let BASE_URL = "http://localhost:3000";
+  // https://desafio-3-trilhas-2b.onrender.com para produção
+  // http://localhost:3000 para desenvolvimento
+  let BASE_URL = "https://desafio-3-trilhas-2b.onrender.com";
   try {
     const sanitizedCpf = cpf.replace(/\D/g, "");
     const response = await fetch(`${BASE_URL}/api/inscricao/${sanitizedCpf}`);
