@@ -1,102 +1,137 @@
+# Sistema de Inscrição e Cadastro de Candidatos
+
 ## Descrição
 
-Criação de um processo de inscrições por meio de um formulário estático. O formulário foi criado para agilizar o cadastro de candidatos, coletando dados de forma eficiente e segura. Ele resolve o problema de inscrições desorganizadas, oferecendo uma interface intuitiva, validação de campos e conformidade com a LGPD.
+Este projeto consiste em um sistema de inscrições e cadastro para candidatos, desenvolvido com o objetivo de agilizar e organizar o processo de cadastro. Ele oferece uma interface intuitiva para os usuários, validação de campos para garantir a integridade dos dados e conformidade com a LGPD. O sistema permite que os candidatos realizem login, preencham um formulário de inscrição e acompanhem o status de sua inscrição.
 
-Este projeto utiliza as seguintes tecnologias:
+## Tecnologias Utilizadas
+
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 - **HTML5**: Para a estruturação do conteúdo da página.
-
 - **CSS3**: Para a estilização da página.
-
-- **Tailwind CSS**: Um framework de CSS utilitário que permite estilizar páginas rapidamente usando classes pré-definidas. [Tailwind CSS Documentation](https://tailwindcss.com/docs/styling-with-utility-classes).
-
-- **JavaScript**: Para adicionar interatividade à página.
-
+- **Tailwind CSS**: Framework utilitário para estilização rápida.
+- **JavaScript**: Para adicionar interatividade e lógica ao sistema.
 - **Node.js**: Para gerenciar dependências e scripts de build.
-
-- **npm**: Gerenciador de pacotes do Node.js para instalar e 
-gerenciar dependências.
-
+- **npm**: Gerenciador de pacotes do Node.js.
+- **Express**: Framework para criação de APIs.
+- **PostgreSQL**: Banco de dados relacional para armazenamento de informações.
+- **Docker**: Para containerização do banco de dados.
+- **dotenv**: Para gerenciamento de variáveis de ambiente.
+- **bcrypt**: Para criptografia de senhas.
+- **CORS**: Para controle de acesso entre origens.
 - **Git**: Para controle de versão e colaboração no código.
-
 - **Live Server**: Extensão do Visual Studio Code para recarregar a página automaticamente durante o desenvolvimento.
 
-O projeto seguirá o [design disponibilizado no Figma](https://www.figma.com/design/xMXycKv7AAwE7oVGJ1whpd/Desafio-2---Trilhas-2B?node-id=22-377&p=f&t=y4NR5blp1qxlMImV-0)
+## Funcionalidades Existentes
 
-![desafio-2-trilhas-2-b vercel app_ (3)](https://github.com/user-attachments/assets/07824af1-2714-4467-8f00-064f162899c8)
-Figura 1: Captura de tela do formulário, disponível em https://desafio-2-trilhas-2-b.vercel.app/.
+1. **Login e Cadastro de Usuário**:
 
-![iphone](https://github.com/user-attachments/assets/0a94c59b-a751-48b4-be6e-5f9632f6d482)
-Figura 2: O projeto também pode ser acessado em dispositivos móveis.
+   - Usuários podem realizar login ou criar uma conta caso ainda não possuam.
+   - Após o login, o usuário é redirecionado para a página inicial.
 
-## Pré-requisitos
+2. **Formulário de Inscrição**:
 
-- Node.js instalado (versão 14 ou superior)
-- npm (gerenciador de pacotes do Node.js)
+   - O formulário coleta informações necessárias para a inscrição no programa.
 
-## Instalação
+3. **Exibição de Dados na Página Inicial**:
 
-1. Clone o repositório para o seu ambiente local:
+   - Após o envio do formulário, os dados do candidato são exibidos na página inicial, incluindo o status de inscrição.
+
+4. **Armazenamento Seguro**:
+
+   - As senhas dos usuários são armazenadas de forma criptografada no banco de dados.
+
+5. **API para Gerenciamento de Inscrições**:
+   - Endpoints para cadastro, login e gerenciamento de inscrições.
+
+## Como Rodar Localmente
+
+Siga os passos abaixo para rodar o projeto em sua máquina local:
+
+### Pré-requisitos
+
+- **Node.js** (versão 14 ou superior) instalado.
+- **npm** (gerenciador de pacotes do Node.js).
+- **Docker** (para rodar o banco de dados PostgreSQL).
+
+### Passos
+
+1. **Clone o repositório**:
 
    ```sh
    git clone https://github.com/sans-script/Desafio-2-Trilhas-2B.git
    ```
-2. Navegue até o diretório do projeto:
+
+2. **Navegue até o diretório do projeto**:
+
    ```sh
    cd Desafio-2-Trilhas-2B
    ```
-3. Instale as dependências do projeto:
+
+3. **Instale as dependências**:
+
    ```sh
    npm install
    ```
 
-## Execução
+4. **Configure o banco de dados**:
 
-Para iniciar o projeto, execute o seguinte comando:
+   - Certifique-se de que o Docker está instalado e em execução.
+   - Suba o banco de dados com o comando:
+     ```sh
+     docker-compose up -d
+     ```
+   - Inicialize as tabelas do banco de dados:
+     ```sh
+     node api/init-db.js
+     ```
 
-```sh
-npm start
-```
+5. **Inicie o servidor**:
 
-> [!NOTE]  
-> Este comando irá iniciar o Tailwind CLI em modo watch, compilando o arquivo `styles.css` para `dist/output.css` sempre que houver alterações.
+   ```sh
+   node api/server.js
+   ```
 
-## Visualização
+6. **Inicie o projeto**:
 
-Para visualizar a página, você pode utilizar a extensão Live Server no Visual Studio Code. Após instalar a extensão, clique com o botão direito no arquivo `index.html` e selecione "Open with Live Server".
+   ```sh
+   npm start
+   ```
 
-## Subindo Alterações
+   > Este comando inicia o Tailwind CLI em modo watch, compilando o arquivo `styles.css` para `dist/output.css` sempre que houver alterações.
 
-Para subir as alterações feitas no projeto, siga os passos abaixo:
+7. **Visualize o projeto**:
+   - Utilize a extensão **Live Server** no Visual Studio Code.
+   - Clique com o botão direito no arquivo `index.html` e selecione "Open with Live Server".
 
-> [!WARNING]
-> Sempre execute o comando `git pull` antes de iniciar suas alterações para garantir que você está trabalhando com a versão mais recente do repositório remoto:
+## Contribuição
+
+Para contribuir com o projeto, siga os passos abaixo:
+
+1. Certifique-se de estar com a versão mais recente do repositório:
 
    ```sh
    git pull origin main
    ```
 
-1. Adicione os arquivos alterados ao staging:
+2. Faça suas alterações e adicione os arquivos ao staging:
 
    ```sh
    git add .
    ```
-2. Faça um commit das suas alterações:
+
+3. Realize um commit descrevendo as alterações:
 
    ```sh
    git commit -m "Descrição das alterações"
    ```
-3. Envie as alterações para o repositório remoto:
 
+4. Envie as alterações para o repositório remoto:
    ```sh
    git push origin main
    ```
 
+## Design
 
-O que precisa ser feito:
-
-O usuário entra na página de cadastro se não tiver login, caso não tenha um login, ele precisa realizar o cadastro dele.
-
-Depois ele é encaminhado pra home, na home será exibido os dados de incrição enviados por meio do formulário de incrição, caso ele não tenha preenchido esse formulário, deve aparecer um aviso de inscriçao não realizada e um link pro formulário.
-
-Após ter feito o envio dos dados, ele deve voltar pra home e lá deve constar os dados dele que ele enviou e a situação de inscrito no programa. Essa notificação de incrição deve ser enviada no email do candidato
+O design do projeto foi baseado no protótipo disponibilizado no Figma. Acesse o design [aqui](https://www.figma.com/design/xMXycKv7AAwE7oVGJ1whpd/Desafio-2---Trilhas-2B?node-id=22-377&p=f&t=y4NR5blp1qxlMImV-0).
