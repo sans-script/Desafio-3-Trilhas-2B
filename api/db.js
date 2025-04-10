@@ -1,23 +1,17 @@
-const { Pool } = require('pg');
-require('dotenv').config();
-
-// const pool = new Pool({
-//   user: 'trilhas_user',
-//   host: 'localhost',
-//   database: 'trilhas_db',
-//   password: 'trilhas_password',
-//   port: 5432,
-// });
+const { Pool } = require("pg");
+require("dotenv").config();
 
 const pool = new Pool({
-  user: process.env.PG_USER, // Usuário do banco de dados
-  host: process.env.PG_HOST, // Host do banco de dados
-  database: process.env.PG_DATABASE, // Nome do banco de dados
-  password: process.env.PG_PASSWORD, // Senha do banco de dados
-  port: process.env.PG_PORT || 5432, // Porta do banco de dados
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT || 5432,
   ssl: {
     rejectUnauthorized: false, // Necessário para conexões seguras no Render
   },
+  // Para desenvolvimento local, descomente a linha abaixo e comente a linha acima
+  // ssl: false,
 });
 
 module.exports = pool;
