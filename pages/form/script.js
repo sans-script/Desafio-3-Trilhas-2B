@@ -37,7 +37,9 @@ const totalpages = pages.length;
 
 let currentIndex = 0;
 
-// Função para atualizar informações do arquivo
+// https://desafio-3-trilhas-2b.onrender.com
+let BASE_URL = "http://localhost:3000";
+
 function updateFileInfo(inputId, infoDivId) {
   const input = document.getElementById(inputId);
   const fileInfoDiv = document.getElementById(infoDivId);
@@ -68,7 +70,6 @@ function updateFileInfo(inputId, infoDivId) {
   if (isTooLarge) input.value = "";
 }
 
-// Chamadas específicas para cada tipo de arquivo
 function updateIdFile() {
   updateFileInfo("documento", "file-info-identidade");
 }
@@ -77,12 +78,9 @@ function updateResidenceProofFile() {
   updateFileInfo("comprovante", "file-info-comprovante");
 }
 
-// Adiciona eventos de clique aos wrappers dos checkboxes
 document.querySelectorAll(".checkboxWrapper").forEach((wrapper) => {
   wrapper.addEventListener("click", function (e) {
     const checkbox = wrapper.querySelector("input[type='checkbox']");
-
-    // Verifica se o clique foi no próprio checkbox
     if (e.target === checkbox) {
       checkbox.checked = !checkbox.checked;
     } else {
@@ -91,7 +89,6 @@ document.querySelectorAll(".checkboxWrapper").forEach((wrapper) => {
 
     updateCheckboxUI(checkbox);
 
-    // Desmarca os outros checkboxes
     const checkboxes = document.querySelectorAll(".customCheckbox");
     checkboxes.forEach((otherCheckbox) => {
       if (otherCheckbox !== checkbox) {
@@ -102,7 +99,6 @@ document.querySelectorAll(".checkboxWrapper").forEach((wrapper) => {
   });
 });
 
-// Adiciona eventos de mudança aos checkboxes
 document.querySelectorAll(".customCheckbox").forEach((checkbox) => {
   checkbox.addEventListener("change", function () {
     const checkboxes = document.querySelectorAll(".customCheckbox");
@@ -116,7 +112,6 @@ document.querySelectorAll(".customCheckbox").forEach((checkbox) => {
   });
 });
 
-// Atualiza a interface dos checkboxes
 function updateCheckboxUI(checkbox) {
   const wrapper = checkbox.closest(".checkboxWrapper");
   const uncheckedIcon = wrapper.querySelector(".uncheckedIcon");
@@ -135,16 +130,13 @@ function updateCheckboxUI(checkbox) {
   }
 }
 
-// Inicializa o estado do SVG baseado no checkbox
 updateSingleCheckboxUI();
 
-// Escuta o clique no wrapper do checkbox
 singleWrapper.addEventListener("click", () => {
   termosCheckbox.checked = !termosCheckbox.checked;
   updateSingleCheckboxUI();
 });
 
-// Atualiza os SVGs com base no estado do checkbox
 function updateSingleCheckboxUI() {
   if (termosCheckbox.checked) {
     singleUncheckedIcon.classList.add("hidden");
@@ -155,7 +147,6 @@ function updateSingleCheckboxUI() {
   }
 }
 
-// Preenchimento automático da data
 birthdateInput.addEventListener("input", (e) => {
   let value = e.target.value;
   value = value.replace(/\D/g, "");
@@ -167,7 +158,6 @@ birthdateInput.addEventListener("input", (e) => {
   e.target.value = value;
 });
 
-// Preenchimento automático do CPF
 cpfInput.addEventListener("input", (e) => {
   let value = e.target.value;
   value = value.replace(/\D/g, "");
@@ -181,7 +171,6 @@ cpfInput.addEventListener("input", (e) => {
   e.target.value = value;
 });
 
-// Preenchimento automático do telefone
 phoneInput.addEventListener("input", (e) => {
   let value = e.target.value;
   value = value.replace(/\D/g, "");
@@ -193,7 +182,6 @@ phoneInput.addEventListener("input", (e) => {
   e.target.value = value;
 });
 
-// Adiciona estilos de erro aos inputs
 function addErrorStyles(input, errorDiv, showError = true) {
   if (showError) {
     errorDiv.classList.remove("hidden");
@@ -207,7 +195,6 @@ function addErrorStyles(input, errorDiv, showError = true) {
   );
 }
 
-// Remove estilos de erro dos inputs
 function removeErrorStyles(input, errorDiv) {
   errorDiv.classList.add("hidden");
   input.classList.remove(
@@ -218,13 +205,11 @@ function removeErrorStyles(input, errorDiv) {
   input.classList.add("border-stroke-default");
 }
 
-// Adiciona listeners para remover os estilos de erro
 function addInputListeners(input, errorDiv) {
   input.addEventListener("input", () => removeErrorStyles(input, errorDiv));
   input.addEventListener("change", () => removeErrorStyles(input, errorDiv));
 }
 
-// Adiciona os listeners para remover os estilos de erro
 addInputListeners(nomeInput, nomeErrorDiv);
 addInputListeners(birthdateInput, birthdateErrorDiv);
 addInputListeners(cpfInput, cpfErrorDiv);
@@ -240,85 +225,73 @@ addInputListeners(documentoInput, fileIdErrorDiv);
 addInputListeners(comprovanteInput, fileProofErrorDiv);
 addInputListeners(termosCheckbox, termosErrorDiv);
 
-// Validação do formulário no envio
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+emailInput.addEventListener("input", () => {
+  if (!isValidEmail(emailInput.value.trim())) {
+    addErrorStyles(emailInput, emailErrorDiv);
+    emailErrorDiv.querySelector("span").textContent =
+      "Por favor, insira um endereço de e-mail válido 📫";
+  } else {
+    removeErrorStyles(emailInput, emailErrorDiv);
+  }
+});
+
 document.querySelector("form").addEventListener("submit", function (e) {
   let isValid = true;
-
-  // Valida o campo nome
   if (!nomeInput.value.trim()) {
     addErrorStyles(nomeInput, nomeErrorDiv);
     isValid = false;
   }
-
-  // Valida o campo data de nascimento
   if (!birthdateInput.value.trim()) {
     addErrorStyles(birthdateInput, birthdateErrorDiv);
     isValid = false;
   }
-
-  // Valida o campo CPF
   if (!cpfInput.value.trim()) {
     addErrorStyles(cpfInput, cpfErrorDiv);
     isValid = false;
   }
-
-  // Valida o campo sexo
   if (sexInput.value === "Selecionar") {
     addErrorStyles(sexInput, sexErrorDiv);
     isValid = false;
   }
-
-  // Valida o campo email
   if (!emailInput.value.trim()) {
     addErrorStyles(emailInput, emailErrorDiv);
     isValid = false;
   }
-
-  // Valida o campo telefone
   if (!phoneInput.value.trim()) {
     addErrorStyles(phoneInput, phoneErrorDiv);
     isValid = false;
   }
-
-  // Valida o campo CEP
   if (!cepInput.value.trim()) {
     addErrorStyles(cepInput, adressErrorDiv, false);
     isValid = false;
   }
-
-  // Valida o campo rua
   if (!ruaInput.value.trim()) {
     addErrorStyles(ruaInput, adressErrorDiv, false);
     isValid = false;
   }
-
-  // Valida o campo número
   if (!numeroInput.value.trim()) {
     addErrorStyles(numeroInput, adressErrorDiv, false);
     isValid = false;
   }
-
-  // Valida o campo cidade
   if (!cidadeInput.value.trim()) {
     addErrorStyles(cidadeInput, adressErrorDiv, false);
     isValid = false;
   }
-
-  // Valida o campo estado
   if (!estadoInput.value.trim()) {
     addErrorStyles(estadoInput, adressErrorDiv, false);
     isValid = false;
   }
-
-  // Exibe ou oculta o erro de endereço
   if (!isValid) {
     adressErrorDiv.classList.remove("hidden");
     adressErrorDiv.classList.add("flex");
   } else {
     adressErrorDiv.classList.add("hidden");
   }
-
-  // Valida o campo documento
   if (!documentoInput.files.length) {
     fileIdErrorDiv.classList.remove("hidden");
     fileIdErrorDiv.classList.add("flex");
@@ -326,8 +299,6 @@ document.querySelector("form").addEventListener("submit", function (e) {
   } else {
     fileIdErrorDiv.classList.add("hidden");
   }
-
-  // Valida o campo comprovante
   if (!comprovanteInput.files.length) {
     fileProofErrorDiv.classList.remove("hidden");
     fileProofErrorDiv.classList.add("flex");
@@ -335,15 +306,12 @@ document.querySelector("form").addEventListener("submit", function (e) {
   } else {
     fileProofErrorDiv.classList.add("hidden");
   }
-
-  // Valida se pelo menos uma trilha foi selecionada
   const trilhasCheckboxes = document.querySelectorAll(
     ".checkboxWrapper input[type='checkbox']"
   );
   const isTrilhaSelected = Array.from(trilhasCheckboxes).some(
     (checkbox) => checkbox.checked
   );
-
   if (!isTrilhaSelected) {
     trilhasErrorDiv.classList.remove("hidden");
     trilhasErrorDiv.classList.add("flex");
@@ -351,8 +319,6 @@ document.querySelector("form").addEventListener("submit", function (e) {
   } else {
     trilhasErrorDiv.classList.add("hidden");
   }
-
-  // Valida se os termos foram aceitos
   if (!termosCheckbox.checked) {
     termosErrorDiv.classList.remove("hidden");
     termosErrorDiv.classList.add("flex");
@@ -360,8 +326,6 @@ document.querySelector("form").addEventListener("submit", function (e) {
   } else {
     termosErrorDiv.classList.add("hidden");
   }
-
-  // Impede o envio do formulário se houver erros
   if (!isValid) {
     e.preventDefault();
   }
@@ -369,23 +333,20 @@ document.querySelector("form").addEventListener("submit", function (e) {
 
 function showpage(index) {
   if (index >= totalpages) {
-    currentIndex = totalpages - 1; // Impede que vá além do último page
+    currentIndex = totalpages - 1;
   } else if (index < 0) {
-    currentIndex = 0; // Impede que vá antes do primeiro page
+    currentIndex = 0;
   }
   pageContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-  // Oculta ou exibe os botões
   if (currentIndex === 0) {
-    prevBtn.classList.add("hidden"); // Oculta o botão "Prev" no primeiro page
+    prevBtn.classList.add("hidden");
   } else {
-    prevBtn.classList.remove("hidden"); // Exibe o botão "Prev"
+    prevBtn.classList.remove("hidden");
   }
-
   if (currentIndex === totalpages - 1) {
-    nextBtn.classList.add("hidden"); // Oculta o botão "Next" no último page
+    nextBtn.classList.add("hidden");
   } else {
-    nextBtn.classList.remove("hidden"); // Exibe o botão "Next"
+    nextBtn.classList.remove("hidden");
   }
 }
 
@@ -401,7 +362,6 @@ prevBtn.addEventListener("click", () => {
   formScroll.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Inicializa a página
 showpage(currentIndex);
 
 document.querySelector("form").addEventListener("submit", async function (e) {
@@ -409,7 +369,6 @@ document.querySelector("form").addEventListener("submit", async function (e) {
 
   const formData = new FormData(this);
 
-  // Converte os arquivos para base64
   const documentoFile = formData.get("documento");
   const comprovanteFile = formData.get("comprovante");
 
@@ -421,10 +380,10 @@ document.querySelector("form").addEventListener("submit", async function (e) {
   const data = {
     nome: formData.get("nome"),
     data_nascimento: formData.get("data-de-nascimento"),
-    cpf: formData.get("cpf").replace(/\D/g, ""), // Remove a máscara do CPF
+    cpf: formData.get("cpf").replace(/\D/g, ""),
     sexo: formData.get("sexo"),
     email: formData.get("email"),
-    telefone: formData.get("numero").replace(/\D/g, ""), // Remove a máscara do telefone
+    telefone: formData.get("numero").replace(/\D/g, ""),
     endereco: {
       cep: formData.get("cep"),
       rua: formData.get("rua"),
@@ -438,8 +397,7 @@ document.querySelector("form").addEventListener("submit", async function (e) {
   };
 
   try {
-      // Use http://localhost:3000 no lugar de https://desafio-3-trilhas-2b.onrender.com para rodar localmente
-    const response = await fetch("https://desafio-3-trilhas-2b.onrender.com/api/inscricao", {
+    const response = await fetch(`${BASE_URL}/api/inscricao`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -458,12 +416,158 @@ document.querySelector("form").addEventListener("submit", async function (e) {
   }
 });
 
-// Função para converter arquivo em base64
 function toBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(",")[1]); // Remove o prefixo "data:..."
+    reader.onload = () => resolve(reader.result.split(",")[1]);
     reader.onerror = (error) => reject(error);
     reader.readAsDataURL(file);
   });
 }
+
+function saveToLocalStorage(key, value) {
+  localStorage.setItem(key, value);
+}
+
+function loadFromLocalStorage(key) {
+  return localStorage.getItem(key) || "";
+}
+
+nomeInput.value = loadFromLocalStorage("nome");
+birthdateInput.value = loadFromLocalStorage("data-de-nascimento");
+cpfInput.value = loadFromLocalStorage("cpf-form");
+sexInput.value = loadFromLocalStorage("sexo");
+emailInput.value = loadFromLocalStorage("email");
+phoneInput.value = loadFromLocalStorage("numero");
+cepInput.value = loadFromLocalStorage("cep");
+ruaInput.value = loadFromLocalStorage("rua");
+numeroInput.value = loadFromLocalStorage("numero-casa");
+cidadeInput.value = loadFromLocalStorage("cidade");
+estadoInput.value = loadFromLocalStorage("estado");
+
+nomeInput.addEventListener("input", () =>
+  saveToLocalStorage("nome", nomeInput.value)
+);
+birthdateInput.addEventListener("input", () =>
+  saveToLocalStorage("data-de-nascimento", birthdateInput.value)
+);
+cpfInput.addEventListener("input", () =>
+  saveToLocalStorage("cpf-form", cpfInput.value)
+);
+sexInput.addEventListener("change", () =>
+  saveToLocalStorage("sexo", sexInput.value)
+);
+emailInput.addEventListener("input", () =>
+  saveToLocalStorage("email", emailInput.value)
+);
+phoneInput.addEventListener("input", () =>
+  saveToLocalStorage("numero", phoneInput.value)
+);
+cepInput.addEventListener("input", () =>
+  saveToLocalStorage("cep", cepInput.value)
+);
+ruaInput.addEventListener("input", () =>
+  saveToLocalStorage("rua", ruaInput.value)
+);
+numeroInput.addEventListener("input", () =>
+  saveToLocalStorage("numero-casa", numeroInput.value)
+);
+cidadeInput.addEventListener("input", () =>
+  saveToLocalStorage("cidade", cidadeInput.value)
+);
+estadoInput.addEventListener("input", () =>
+  saveToLocalStorage("estado", estadoInput.value)
+);
+
+documentoInput.addEventListener("change", async () => {
+  if (documentoInput.files.length > 0) {
+    const file = documentoInput.files[0];
+    try {
+      const base64File = await toBase64(file);
+      saveToLocalStorage(
+        "documento",
+        JSON.stringify({ name: file.name, data: base64File })
+      );
+      const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+      const fileInfoDiv = document.getElementById("file-info-identidade");
+      fileInfoDiv.textContent = `Arquivo selecionado: ${file.name} (${fileSizeMB} MB)`;
+    } catch (error) {
+      console.error("Erro ao converter o arquivo para Base64:", error);
+    }
+  }
+});
+
+comprovanteInput.addEventListener("change", async () => {
+  if (comprovanteInput.files.length > 0) {
+    const file = comprovanteInput.files[0];
+    try {
+      const base64File = await toBase64(file);
+      saveToLocalStorage(
+        "comprovante",
+        JSON.stringify({ name: file.name, data: base64File })
+      );
+      const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+      const fileInfoDiv = document.getElementById("file-info-comprovante");
+      fileInfoDiv.textContent = `Arquivo selecionado: ${file.name} (${fileSizeMB} MB)`;
+    } catch (error) {
+      console.error("Erro ao converter o arquivo para Base64:", error);
+    }
+  }
+});
+
+const savedDocumento = loadFromLocalStorage("documento");
+const savedComprovante = loadFromLocalStorage("comprovante");
+
+if (savedDocumento) {
+  const documentoData = JSON.parse(savedDocumento);
+  const fileSizeMB = (
+    (documentoData.data.length * 3) /
+    4 /
+    (1024 * 1024)
+  ).toFixed(2);
+  const fileInfoDiv = document.getElementById("file-info-identidade");
+  fileInfoDiv.textContent = `Arquivo selecionado: ${documentoData.name} (${fileSizeMB} MB)`;
+}
+
+if (savedComprovante) {
+  const comprovanteData = JSON.parse(savedComprovante);
+  const fileSizeMB = (
+    (comprovanteData.data.length * 3) /
+    4 /
+    (1024 * 1024)
+  ).toFixed(2);
+  const fileInfoDiv = document.getElementById("file-info-comprovante");
+  fileInfoDiv.textContent = `Arquivo selecionado: ${comprovanteData.name} (${fileSizeMB} MB)`;
+}
+
+// Salvar estado do checkbox de termos
+termosCheckbox.addEventListener("change", () => {
+  saveToLocalStorage("termosAceito", termosCheckbox.checked);
+});
+
+// Salvar estado de todos os checkboxes das trilhas
+document.querySelectorAll(".customCheckbox").forEach((checkbox) => {
+  checkbox.addEventListener("change", () => {
+    const trilhaselecionada = Array.from(
+      document.querySelectorAll(".customCheckbox")
+    ).map((checkbox) => ({
+      value: checkbox.value,
+      checked: checkbox.checked,
+    }));
+    console.log("Trilhas selecionadas:", trilhaselecionada);
+    saveToLocalStorage("trilhaSelecionada", JSON.stringify(trilhaselecionada));
+  });
+});
+
+const termosAceitos = loadFromLocalStorage("termosAceito") === "true";
+termosCheckbox.checked = termosAceitos;
+updateSingleCheckboxUI();
+
+const trilhaselecionada = JSON.parse(
+  loadFromLocalStorage("trilhaSelecionada") || "[]"
+);
+document.querySelectorAll(".customCheckbox").forEach((checkbox) => {
+  const trilha = trilhaselecionada.find((t) => t.value === checkbox.value);
+  checkbox.checked = trilha ? trilha.checked : false;
+  updateCheckboxUI(checkbox);
+});

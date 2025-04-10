@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const cpf = localStorage.getItem("cpf"); // Recupera o CPF do localStorage
+  const cpf = localStorage.getItem("cpf");
 
   if (!cpf) {
     alert("Você precisa estar logado para acessar esta página.");
@@ -41,16 +41,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   const welcomeText = document.getElementById("welcome-text");
   const timerElement = document.getElementById("session-timer");
   const logoutButton = document.getElementById("logout-button");
-  // Use http://localhost:3000 no lugar de https://desafio-3-trilhas-2b.onrender.com para rodar localmente
+  // https://desafio-3-trilhas-2b.onrender.com
+  let BASE_URL = "http://localhost:3000";
   try {
-    // Faz a requisição para buscar os dados de inscrição
-    const sanitizedCpf = cpf.replace(/\D/g, ""); // Remove caracteres não numéricos
-    const response = await fetch(
-      `https://desafio-3-trilhas-2b.onrender.com/api/inscricao/${sanitizedCpf}`
-    );
+    const sanitizedCpf = cpf.replace(/\D/g, "");
+    const response = await fetch(`${BASE_URL}/api/inscricao/${sanitizedCpf}`);
 
     if (response.status === 404) {
-      // Exibe a mensagem de "não inscrito"
       welcomeText.innerHTML = `Olá, ${cpf}!`;
       document.querySelector("main").innerHTML += `
         <section class="flex flex-col p-4 gap-4">
@@ -163,8 +160,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     alert("Erro ao conectar ao servidor.");
   }
 
-  // Timer de sessão
-  let timer = 1800; // 30 minutos em segundos
+  let timer = 1800;
   function updateTimer() {
     const minutes = Math.floor(timer / 60);
     const seconds = timer % 60;
@@ -192,17 +188,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
-// Função para formatar CPF
 function formatCpf(cpf) {
   return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 }
 
-// Função para formatar telefone
 function formatTelefone(telefone) {
   return telefone.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
 }
 
-// Função para formatar data de nascimento
 function formatData(data) {
   const date = new Date(data);
   return date.toLocaleDateString("pt-BR", {
