@@ -2,7 +2,8 @@ const registerForm = document.getElementById("register-form");
 const loginForm = document.getElementById("login-form");
 const toggleLink = document.getElementById("toggle-link");
 const formTitle = document.getElementById("form-title");
-let isLogin = false; // Inicia com o formulário de cadastro ativo
+let isLogin = false;
+let BASE_URL = "http://localhost:3000";
 document.title = "Registre-se! - Cadastro";
 formTitle.innerText = "CADASTRE-SE";
 
@@ -41,40 +42,31 @@ function formatarCPF(cpf) {
   );
 }
 
-// Formatar CPF no formulário de cadastro
 document.getElementById("register-cpf").addEventListener("input", (e) => {
   e.target.value = formatarCPF(e.target.value);
 });
 
-// Formatar CPF no formulário de login
 document.getElementById("login-cpf").addEventListener("input", (e) => {
   e.target.value = formatarCPF(e.target.value);
 });
-// Lógica de cadastro
+
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-
   let cpf = document.getElementById("register-cpf").value;
   const senha = document.getElementById("register-password").value;
-
-  // Remove a máscara do CPF
-  cpf = cpf.replace(/\D/g, ""); // Garante que o CPF esteja sem formatação
-
+  cpf = cpf.replace(/\D/g, "");
   try {
-    const response = await fetch(
-      "https://desafio-3-trilhas-2b.onrender.com/register",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cpf, senha }),
-      }
-    );
+    const response = await fetch(`${BASE_URL}/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cpf, senha }),
+    });
 
     if (response.ok) {
       const data = await response.json();
       alert("Cadastro realizado com sucesso!");
-      localStorage.setItem("cpf", cpf); // Salva o CPF sem formatação no localStorage
-      toggleLink.click(); // Alterna para o formulário de login
+      localStorage.setItem("cpf", cpf);
+      toggleLink.click();
     } else {
       const error = await response.json();
       alert(error.error);
@@ -84,32 +76,26 @@ registerForm.addEventListener("submit", async (e) => {
     alert("Erro ao conectar ao servidor.");
   }
 });
-// Lógica de login
+
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   let cpf = document.getElementById("login-cpf").value;
   const senha = document.getElementById("login-password").value;
+  cpf = cpf.replace(/\D/g, "");
 
-  // Remove a máscara do CPF
-  cpf = cpf.replace(/\D/g, ""); // Garante que o CPF esteja sem formatação
-  
-  // Use http://localhost:3000 no lugar de https://desafio-3-trilhas-2b.onrender.com para rodar localmente
   try {
-    const response = await fetch(
-      "https://desafio-3-trilhas-2b.onrender.com/login",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cpf, senha }),
-      }
-    );
+    const response = await fetch(`${BASE_URL}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cpf, senha }),
+    });
 
     if (response.ok) {
       const data = await response.json();
       alert("Login realizado com sucesso!");
-      localStorage.setItem("cpf", cpf); // Salva o CPF sem formatação no localStorage
-      window.location.href = "/pages/home/index.html"; // Redireciona para a home
+      localStorage.setItem("cpf", cpf);
+      window.location.href = "/pages/home/index.html";
     } else {
       const error = await response.json();
       alert(error.error);
