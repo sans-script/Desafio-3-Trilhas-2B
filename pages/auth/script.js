@@ -3,7 +3,9 @@ const loginForm = document.getElementById("login-form");
 const toggleLink = document.getElementById("toggle-link");
 const formTitle = document.getElementById("form-title");
 let isLogin = false;
-let BASE_URL = "http://localhost:3000";
+// https://desafio-3-trilhas-2b.onrender.com para produção
+// http://localhost:3000 para desenvolvimento
+let BASE_URL = "https://desafio-3-trilhas-2b.onrender.com";
 document.title = "Registre-se! - Cadastro";
 formTitle.innerText = "CADASTRE-SE";
 

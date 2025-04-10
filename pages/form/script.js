@@ -541,34 +541,9 @@ if (savedComprovante) {
   fileInfoDiv.textContent = `Arquivo selecionado: ${comprovanteData.name} (${fileSizeMB} MB)`;
 }
 
-// Salvar estado do checkbox de termos
 termosCheckbox.addEventListener("change", () => {
   saveToLocalStorage("termosAceito", termosCheckbox.checked);
 });
-
-// Salvar estado de todos os checkboxes das trilhas
-document.querySelectorAll(".customCheckbox").forEach((checkbox) => {
-  checkbox.addEventListener("change", () => {
-    const trilhaselecionada = Array.from(
-      document.querySelectorAll(".customCheckbox")
-    ).map((checkbox) => ({
-      value: checkbox.value,
-      checked: checkbox.checked,
-    }));
-    console.log("Trilhas selecionadas:", trilhaselecionada);
-    saveToLocalStorage("trilhaSelecionada", JSON.stringify(trilhaselecionada));
-  });
-});
-
 const termosAceitos = loadFromLocalStorage("termosAceito") === "true";
 termosCheckbox.checked = termosAceitos;
 updateSingleCheckboxUI();
-
-const trilhaselecionada = JSON.parse(
-  loadFromLocalStorage("trilhaSelecionada") || "[]"
-);
-document.querySelectorAll(".customCheckbox").forEach((checkbox) => {
-  const trilha = trilhaselecionada.find((t) => t.value === checkbox.value);
-  checkbox.checked = trilha ? trilha.checked : false;
-  updateCheckboxUI(checkbox);
-});
