@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const express = require("express");
 const pool = require("./db");
 const bodyParser = require("body-parser");
@@ -6,24 +7,17 @@ const bcrypt = require("bcrypt");
 
 const app = express();
 
-// Configura o limite de tamanho do corpo da requisição
-app.use(bodyParser.json({ limit: "10mb" })); // Aumenta o limite para 10 MB
-app.use(bodyParser.urlencoded({ limit: "10mb", extended: true })); // Para dados codificados em URL
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 const cors = require("cors");
-app.use(cors({ origin: "https://desafio-3-trilhas-2-b.vercel.app" }));
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
 
-// Rota de cadastro
 app.post("/register", async (req, res) => {
   let { cpf, senha } = req.body;
-
   try {
-    // Remove a máscara do CPF
-    cpf = cpf.replace(/\D/g, ""); // Garante que o CPF esteja sem formatação
-
+    cpf = cpf.replace(/\D/g, "");
     console.log("Tentando cadastrar usuário com CPF:", cpf);
-
-    // Verifica se o CPF já está cadastrado
     const userExists = await pool.query(
       "SELECT * FROM usuarios WHERE cpf = $1",
       [cpf]
@@ -32,16 +26,12 @@ app.post("/register", async (req, res) => {
       console.warn("CPF já cadastrado:", cpf);
       return res.status(400).json({ error: "CPF já cadastrado." });
     }
-
-    // Criptografa a senha
     const hashedPassword = await bcrypt.hash(senha, 10);
 
-    // Insere o usuário no banco de dados
     const newUser = await pool.query(
       "INSERT INTO usuarios (cpf, senha) VALUES ($1, $2) RETURNING id, cpf",
       [cpf, hashedPassword]
     );
-
     console.log("Usuário cadastrado com sucesso:", newUser.rows[0]);
     res.status(201).json({
       message: "Usuário cadastrado com sucesso!",
@@ -53,17 +43,11 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Rota de login
 app.post("/login", async (req, res) => {
   let { cpf, senha } = req.body;
-
   try {
-    // Remove a máscara do CPF
-    cpf = cpf.replace(/\D/g, ""); // Garante que o CPF esteja sem formatação
-
+    cpf = cpf.replace(/\D/g, "");
     console.log("Tentando login com CPF:", cpf);
-
-    // Verifica se o usuário existe
     const user = await pool.query("SELECT * FROM usuarios WHERE cpf = $1", [
       cpf,
     ]);
@@ -71,20 +55,15 @@ app.post("/login", async (req, res) => {
       console.warn("Usuário não encontrado:", cpf);
       return res.status(400).json({ error: "CPF ou senha inválidos." });
     }
-
-    // Verifica a senha
     const isPasswordValid = await bcrypt.compare(senha, user.rows[0].senha);
     if (!isPasswordValid) {
       console.warn("Senha inválida para o CPF:", cpf);
       return res.status(400).json({ error: "CPF ou senha inválidos." });
     }
-
-    // Busca os dados de inscrição com base no CPF
     const inscricao = await pool.query(
       "SELECT * FROM inscricoes WHERE cpf = $1",
       [cpf]
     );
-
     console.log("Login realizado com sucesso para o CPF:", cpf);
     res.status(200).json({
       message: "Login realizado com sucesso!",
@@ -96,8 +75,6 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ error: "Erro ao realizar login." });
   }
 });
-
-// Rota para salvar os dados do formulário
 app.post("/api/inscricao", async (req, res) => {
   let {
     nome,
@@ -108,18 +85,14 @@ app.post("/api/inscricao", async (req, res) => {
     telefone,
     endereco,
     trilha,
-    documento, // Arquivo em base64
-    comprovante, // Arquivo em base64
+    documento,
+    comprovante,
   } = req.body;
 
   try {
-    // Remove a máscara do CPF e do telefone
     cpf = cpf.replace(/\D/g, "");
-    telefone = telefone.replace(/\D/g, ""); // Remove a máscara do telefone
-
+    telefone = telefone.replace(/\D/g, "");
     console.log("Tentando salvar inscrição para o CPF:", cpf);
-
-    // Verifica se o CPF já está vinculado a uma inscrição
     const inscricaoExistente = await pool.query(
       "SELECT * FROM inscricoes WHERE cpf = $1",
       [cpf]
@@ -130,12 +103,9 @@ app.post("/api/inscricao", async (req, res) => {
         .status(400)
         .json({ error: "CPF já cadastrado em uma inscrição." });
     }
-
-    // Converte a data de DD/MM/YYYY para YYYY-MM-DD
     const [dia, mes, ano] = data_nascimento.split("/");
     const dataNascimentoFormatada = `${ano}-${mes}-${dia}`;
 
-    // Converte os arquivos base64 para binário
     const documentoBuffer = documento ? Buffer.from(documento, "base64") : null;
     const comprovanteBuffer = comprovante
       ? Buffer.from(comprovante, "base64")
@@ -169,14 +139,11 @@ app.post("/api/inscricao", async (req, res) => {
   }
 });
 
-// Rota para buscar os dados de inscrição de um usuário
 app.get("/api/inscricao/:cpf", async (req, res) => {
   const { cpf } = req.params;
 
   try {
     console.log("Buscando inscrição para o CPF:", cpf);
-
-    // Busca a inscrição vinculada ao CPF
     const result = await pool.query("SELECT * FROM inscricoes WHERE cpf = $1", [
       cpf,
     ]);
@@ -194,7 +161,6 @@ app.get("/api/inscricao/:cpf", async (req, res) => {
   }
 });
 
-// Rota para baixar o documento
 app.get("/api/inscricao/:cpf/documento", async (req, res) => {
   const { cpf } = req.params;
 
@@ -220,7 +186,6 @@ app.get("/api/inscricao/:cpf/documento", async (req, res) => {
   }
 });
 
-// Rota para baixar o comprovante
 app.get("/api/inscricao/:cpf/comprovante", async (req, res) => {
   const { cpf } = req.params;
 
@@ -248,7 +213,6 @@ app.get("/api/inscricao/:cpf/comprovante", async (req, res) => {
   }
 });
 
-// Inicia o servidor
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
