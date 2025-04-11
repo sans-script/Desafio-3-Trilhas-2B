@@ -47,7 +47,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 ## Como Rodar Localmente
 
-Siga os passos abaixo para rodar o projeto em sua máquina local. Esses passos são necessários caso o deploy do servidor e/ou do banco de dados na Render venha a ser cancelada pela plataforma. 
+Para executar o projeto em sua máquina local, siga os passos necessários caso o deploy do servidor e/ou do banco de dados na Render venha a ser cancelado pela plataforma. Certifique-se de verificar o arquivo env.example para criar corretamente o seu .env. Além disso, ajuste a variável CORS_ORIGIN para que corresponda à URL onde o frontend está sendo executado na sua máquina, evitando possíveis problemas com bloqueio de CORS.
 
 ### Pré-requisitos
 
@@ -98,7 +98,7 @@ Siga os passos abaixo para rodar o projeto em sua máquina local. Esses passos s
    node api/server.js
    ```
 
-> [!IMPORTANT]  
+> [!CAUTION]  
 > Execute o comando acima diretamente da sua home peloamordedeus, não entre na pasta api com o comando cd api e execute comandos diretamente na pasta que não vai funcionar. Use node api/nome-do-arquivo.js. Isso garante que o .env seja carregado.
 
 6. **Inicie o projeto**:
