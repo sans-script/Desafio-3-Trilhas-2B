@@ -1,4 +1,4 @@
-# Sistema de Inscrição e Cadastro de Candidatos
+# Plataforma de Inscrições 
 
 ## Descrição
 
@@ -47,7 +47,10 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 ## Como Rodar Localmente
 
-Para executar o projeto em sua máquina local, siga os passos necessários caso o deploy do servidor e/ou do banco de dados na Render venha a ser cancelado pela plataforma. Certifique-se de verificar o arquivo env.example para criar corretamente o seu .env. Além disso, ajuste a variável CORS_ORIGIN para que corresponda à URL onde o frontend está sendo executado na sua máquina, evitando possíveis problemas com bloqueio de CORS.
+Para executar o projeto em sua máquina local, siga os passos necessários caso o deploy do servidor e/ou do banco de dados na Render venha a ser cancelado pela plataforma. 
+
+> [!NOTE] 
+> Certifique-se de verificar o arquivo `env.example` para criar corretamente o seu `.env`. Além disso, ajuste a variável `CORS_ORIGIN` para que corresponda à URL onde o frontend está sendo executado na sua máquina, evitando possíveis problemas com bloqueio de CORS.
 
 ### Pré-requisitos
 
@@ -80,11 +83,13 @@ Para executar o projeto em sua máquina local, siga os passos necessários caso 
 4. **Configure o banco de dados**:
 
    - Certifique-se de que o Docker está instalado e em execução.
- - 
+
    - Suba o banco de dados com o comando:
+     
      ```sh
      docker-compose up -d
      ```
+     
    - Inicialize as tabelas do banco de dados:
      ```sh
      node api/init-db.js
@@ -99,15 +104,15 @@ Para executar o projeto em sua máquina local, siga os passos necessários caso 
    ```
 
 > [!CAUTION]  
-> Execute o comando acima diretamente da sua home peloamordedeus, não entre na pasta api com o comando cd api e execute comandos diretamente na pasta que não vai funcionar. Use node api/nome-do-arquivo.js. Isso garante que o .env seja carregado.
+> Execute o comando acima diretamente da sua home peloamordedeus, não entre na pasta api com o comando `cd api` e execute comandos diretamente na pasta que não vai funcionar. Use `node api/nome-do-arquivo.js`. Isso garante que o `.env` seja carregado.
 
 6. **Inicie o projeto**:
 
    ```sh
    npm start
    ```
-   
-> [!INFO]
+
+> [!TIP]
 > Este comando inicia o Tailwind CLI em modo watch, compilando o arquivo `styles.css` para `dist/output.css` sempre que houver alterações nos arquivos. Use `npm run build` para gerar o arquivo sem o modo --watch. 
 
 7. **Visualize o projeto**:
@@ -142,7 +147,3 @@ Para contribuir com o projeto, siga os passos abaixo:
    ```sh
    git push origin main
    ```
-
-## Design
-
-O design do projeto foi baseado no protótipo disponibilizado no Figma. Acesse o design [aqui](https://www.figma.com/design/xMXycKv7AAwE7oVGJ1whpd/Desafio-2---Trilhas-2B?node-id=22-377&p=f&t=y4NR5blp1qxlMImV-0).
