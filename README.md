@@ -106,6 +106,7 @@ Siga os passos abaixo para rodar o projeto em sua máquina local. Esses passos s
    ```sh
    npm start
    ```
+   
 > [!INFO]
 > Este comando inicia o Tailwind CLI em modo watch, compilando o arquivo `styles.css` para `dist/output.css` sempre que houver alterações nos arquivos. Use `npm run build` para gerar o arquivo sem o modo --watch. 
 
