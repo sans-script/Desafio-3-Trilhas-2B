@@ -47,12 +47,14 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 ## Como Rodar Localmente
 
-Siga os passos abaixo para rodar o projeto em sua máquina local:
+Siga os passos abaixo para rodar o projeto em sua máquina local. Esses passos são necessários caso o deploy do servidor e/ou do banco de dados na Render venha a ser cancelada pela plataforma. 
 
 ### Pré-requisitos
 
 - **Node.js** (versão 14 ou superior) instalado.
+  
 - **npm** (gerenciador de pacotes do Node.js).
+  
 - **Docker** (para rodar o banco de dados PostgreSQL).
 
 ### Passos
@@ -60,13 +62,13 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
 1. **Clone o repositório**:
 
    ```sh
-   git clone https://github.com/sans-script/Desafio-2-Trilhas-2B.git
+   git clone https://github.com/sans-script/Desafio-3-Trilhas-2B.git
    ```
 
 2. **Navegue até o diretório do projeto**:
 
    ```sh
-   cd Desafio-2-Trilhas-2B
+   cd Desafio-3-Trilhas-2B
    ```
 
 3. **Instale as dependências**:
@@ -78,6 +80,7 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
 4. **Configure o banco de dados**:
 
    - Certifique-se de que o Docker está instalado e em execução.
+ - 
    - Suba o banco de dados com o comando:
      ```sh
      docker-compose up -d
@@ -87,22 +90,29 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
      node api/init-db.js
      ```
 
+
+
 5. **Inicie o servidor**:
 
    ```sh
    node api/server.js
    ```
 
+> [!IMPORTANT]  
+> Execute o comando acima diretamente da sua home peloamordedeus, não entre na pasta api com o comando cd api e execute comandos diretamente na pasta que não vai funcionar. Use node api/nome-do-arquivo.js. Isso garante que o .env seja carregado.
+
 6. **Inicie o projeto**:
 
    ```sh
    npm start
    ```
-
-   > Este comando inicia o Tailwind CLI em modo watch, compilando o arquivo `styles.css` para `dist/output.css` sempre que houver alterações.
+> [!INFO]
+> Este comando inicia o Tailwind CLI em modo watch, compilando o arquivo `styles.css` para `dist/output.css` sempre que houver alterações nos arquivos. Use `npm run build` para gerar o arquivo sem o modo --watch. 
 
 7. **Visualize o projeto**:
+   
    - Utilize a extensão **Live Server** no Visual Studio Code.
+  
    - Clique com o botão direito no arquivo `index.html` e selecione "Open with Live Server".
 
 ## Contribuição
